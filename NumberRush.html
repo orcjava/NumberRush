@@ -5,7 +5,29 @@
     <title>Number Rush</title>
 
     <style>
+        body{
+            background-color: #f4f1de;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
 
+        h1{
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .instructions{
+            font-size: 18px;
+            margin: 5px;
+        }
+
+        #gameDiv{
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid black;
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -13,12 +35,12 @@
 
 <h1>Number Rush</h1>
 
-<p>
-    Click the numbers from the smallest to the largest.
+<p class="instructions">
+    Click the numbers in ascending order.
 </p>
 
-<p>
-    You have three mistakes allowed.
+<p class="instructions">
+    You have 3 mistakes allowed.
 </p>
 
 <button>Start</button>
