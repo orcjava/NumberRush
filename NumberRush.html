@@ -110,9 +110,22 @@
 
 <script>
 
+    let numbers = [];
+
     function getRandomNumber(){
         return Math.floor(Math.random() * 9000) + 1000;
     }
+
+    function generateNumbers(){
+        numbers = [];
+
+        for (let i = 0; i < 10; i++){
+            numbers.push(getRandomNumber());
+        }
+
+        console.log(numbers);
+    }
+    generateNumbers()
 
 </script>
 
