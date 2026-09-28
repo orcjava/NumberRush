@@ -96,6 +96,7 @@
             justify-content: center;
             font-size: 22px;
             font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -131,6 +132,7 @@
 <script>
 
     let numbers = [];
+    let nextNumber = 0;
 
     function getRandomNumber(){
         return Math.floor(Math.random() * 9000) + 1000;
@@ -157,10 +159,13 @@
             numberBox.className = "numberBox";
             numberBox.innerHTML = numbers[i];
 
+            numberBox.onclick = function(){
+                checkNumber(numbers[i]);
+            };
+
             gameDiv.appendChild(numberBox);
         }
     }
-    let nextNumber = 0;
 
     function findMinNumber(){
         nextNumber = numbers[0];
@@ -172,6 +177,10 @@
         }
 
         console.log("Next number:", nextNumber);
+    }
+
+    function checkNumber(number){
+        console.log("Clicked:", number);
     }
 
     function startNewGame(){
