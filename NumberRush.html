@@ -160,7 +160,7 @@
             numberBox.innerHTML = numbers[i];
 
             numberBox.onclick = function(){
-                checkNumber(numbers[i]);
+                checkNumber(numbers[i], numberBox);
             };
 
             gameDiv.appendChild(numberBox);
@@ -179,8 +179,20 @@
         console.log("Next number:", nextNumber);
     }
 
-    function checkNumber(number){
-        console.log("Clicked:", number);
+    function checkNumber(number, numberBox){
+        if (number === nextNumber){
+            numberBox.style.backgroundColor = "#b7e4c7";
+            console.log("Correct!");
+        }
+        else{
+            numberBox.style.backgroundColor = "red";
+
+            setTimeout(function(){
+                numberBox.style.backgroundColor = "#e8f1f8";
+            }, 500);
+
+            console.log("Wrong!");
+        }
     }
 
     function startNewGame(){
