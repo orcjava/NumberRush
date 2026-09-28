@@ -155,12 +155,13 @@
 
         for (let i = 0; i < numbers.length; i++){
             let numberBox = document.createElement("div");
+            let currentNumber = numbers[i];
 
             numberBox.className = "numberBox";
-            numberBox.innerHTML = numbers[i];
+            numberBox.innerHTML = currentNumber;
 
             numberBox.onclick = function(){
-                checkNumber(numbers[i], numberBox);
+                checkNumber(currentNumber, numberBox);
             };
 
             gameDiv.appendChild(numberBox);
@@ -182,7 +183,13 @@
     function checkNumber(number, numberBox){
         if (number === nextNumber){
             numberBox.style.backgroundColor = "#b7e4c7";
+
+            numbers.splice(numbers.indexOf(number), 1);
+
+            findMinNumber();
+
             console.log("Correct!");
+            console.log("Next number:", nextNumber);
         }
         else{
             numberBox.style.backgroundColor = "red";
