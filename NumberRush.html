@@ -139,6 +139,7 @@
     let numbers = [];
     let nextNumber = 0;
     let mistakes = 0;
+    let game = false;
 
     function getRandomNumber(){
         return Math.floor(Math.random() * 9000) + 1000;
@@ -187,7 +188,13 @@
     }
 
     function checkNumber(number, numberBox){
+
+        if (!game){
+            return;
+        }
+
         if (number === nextNumber){
+
             numberBox.style.backgroundColor = "#b7e4c7";
 
             numbers.splice(numbers.indexOf(number), 1);
@@ -196,8 +203,10 @@
 
             console.log("Correct!");
             console.log("Next number:", nextNumber);
+
         }
         else{
+
             mistakes++;
 
             document.getElementById("mistakes").innerHTML = mistakes + " / 3";
@@ -210,11 +219,22 @@
 
             console.log("Wrong!");
             console.log("Mistakes:", mistakes);
+
+            if (mistakes >= 3){
+
+                setTimeout(function(){
+                    game = false;
+                    alert("GAME OVER");
+                }, 500);
+
+            }
         }
     }
 
     function startNewGame(){
+
         mistakes = 0;
+        game = true;
 
         document.getElementById("mistakes").innerHTML = "0 / 3";
 
