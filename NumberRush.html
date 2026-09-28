@@ -141,6 +141,8 @@
     let mistakes = 0;
     let game = false;
 
+    let audioContext = new AudioContext();
+
     function getRandomNumber(){
         return Math.floor(Math.random() * 9000) + 1000;
     }
@@ -188,7 +190,11 @@
     }
 
     function playErrorSound(){
-        let audioContext = new AudioContext();
+
+        if (audioContext.state === "suspended"){
+            audioContext.resume();
+        }
+
         let oscillator = audioContext.createOscillator();
 
         oscillator.type = "sawtooth";
