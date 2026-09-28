@@ -123,7 +123,7 @@
 
 </div>
 
-<button id="startBtn">Start</button>
+<button id="startBtn" onclick="startNewGame()">Start</button>
 
 <div id="gameDiv">
 </div>
@@ -160,8 +160,11 @@
             gameDiv.appendChild(numberBox);
         }
     }
-    generateNumbers();
-    displayNumbers();
+
+    function startNewGame(){
+        generateNumbers();
+        displayNumbers();
+    }
 
 </script>
 
