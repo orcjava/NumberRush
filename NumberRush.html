@@ -160,10 +160,24 @@
             gameDiv.appendChild(numberBox);
         }
     }
+    let nextNumber = 0;
+
+    function findMinNumber(){
+        nextNumber = numbers[0];
+
+        for (let i = 1; i < numbers.length; i++){
+            if (numbers[i] < nextNumber){
+                nextNumber = numbers[i];
+            }
+        }
+
+        console.log("Next number:", nextNumber);
+    }
 
     function startNewGame(){
         generateNumbers();
         displayNumbers();
+        findMinNumber();
     }
 
 </script>
