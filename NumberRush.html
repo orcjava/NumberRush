@@ -50,7 +50,7 @@
             font-weight: bold;
         }
 
-        #timer, #bestTime{
+        #timer, #bestTime, #mistakes{
             font-size: 24px;
             margin-top: 5px;
         }
@@ -122,6 +122,11 @@
         <div id="bestTime">--</div>
     </div>
 
+    <div class="infoBox">
+        <div>MISTAKES</div>
+        <div id="mistakes">0 / 3</div>
+    </div>
+
 </div>
 
 <button id="startBtn" onclick="startNewGame()">Start</button>
@@ -133,6 +138,7 @@
 
     let numbers = [];
     let nextNumber = 0;
+    let mistakes = 0;
 
     function getRandomNumber(){
         return Math.floor(Math.random() * 9000) + 1000;
@@ -192,6 +198,10 @@
             console.log("Next number:", nextNumber);
         }
         else{
+            mistakes++;
+
+            document.getElementById("mistakes").innerHTML = mistakes + " / 3";
+
             numberBox.style.backgroundColor = "red";
 
             setTimeout(function(){
@@ -199,10 +209,15 @@
             }, 500);
 
             console.log("Wrong!");
+            console.log("Mistakes:", mistakes);
         }
     }
 
     function startNewGame(){
+        mistakes = 0;
+
+        document.getElementById("mistakes").innerHTML = "0 / 3";
+
         generateNumbers();
         displayNumbers();
         findMinNumber();
