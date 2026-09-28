@@ -75,7 +75,27 @@
             height: 400px;
             margin: 20px auto;
             border: 2px solid black;
-            background-color: white;
+            background-color: #fff1b8;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .numberBox{
+            width: 100px;
+            height: 60px;
+            background-color: #e8f1f8;
+            border: 1px solid #c5dce8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -125,7 +145,23 @@
 
         console.log(numbers);
     }
-    generateNumbers()
+
+    function displayNumbers(){
+        let gameDiv = document.getElementById("gameDiv");
+
+        gameDiv.innerHTML = "";
+
+        for (let i = 0; i < numbers.length; i++){
+            let numberBox = document.createElement("div");
+
+            numberBox.className = "numberBox";
+            numberBox.innerHTML = numbers[i];
+
+            gameDiv.appendChild(numberBox);
+        }
+    }
+    generateNumbers();
+    displayNumbers();
 
 </script>
 
