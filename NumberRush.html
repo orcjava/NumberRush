@@ -187,6 +187,22 @@
         console.log("Next number:", nextNumber);
     }
 
+    function playErrorSound(){
+        let audioContext = new AudioContext();
+        let oscillator = audioContext.createOscillator();
+
+        oscillator.type = "sawtooth";
+        oscillator.frequency.value = 150;
+
+        oscillator.connect(audioContext.destination);
+
+        oscillator.start();
+
+        setTimeout(function(){
+            oscillator.stop();
+        }, 500);
+    }
+
     function checkNumber(number, numberBox){
 
         if (!game){
@@ -212,6 +228,8 @@
             document.getElementById("mistakes").innerHTML = mistakes + " / 3";
 
             numberBox.style.backgroundColor = "red";
+
+            playErrorSound();
 
             setTimeout(function(){
                 numberBox.style.backgroundColor = "#e8f1f8";
