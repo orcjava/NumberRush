@@ -246,10 +246,22 @@
 
             numbers.splice(numbers.indexOf(number), 1);
 
-            findMinNumber();
+            if (numbers.length === 0){
+
+                stopTimer();
+
+                game = false;
+
+                alert("YOU WIN");
+
+            }
+            else{
+
+                findMinNumber();
+
+            }
 
             console.log("Correct!");
-            console.log("Next number:", nextNumber);
 
         }
         else{
