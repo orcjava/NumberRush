@@ -235,13 +235,11 @@
         clearInterval(timerInterval);
     }
 
-    function updateBestTime(){
+    function updateBestTime(time){
 
-        let currentTime = (Date.now() - startTime) / 1000;
+        if (bestTime === 0 || time < bestTime){
 
-        if (bestTime === 0 || currentTime < bestTime){
-
-            bestTime = currentTime;
+            bestTime = time;
 
             document.getElementById("bestTime").innerHTML =
                 bestTime.toFixed(2) + " s";
@@ -262,9 +260,14 @@
 
             if (numbers.length === 0){
 
+                let finalTime = (Date.now() - startTime) / 1000;
+
                 stopTimer();
 
-                updateBestTime();
+                document.getElementById("timer").innerHTML =
+                    finalTime.toFixed(2) + " s";
+
+                updateBestTime(finalTime);
 
                 game = false;
 
@@ -300,14 +303,17 @@
 
             if (mistakes >= 3){
 
+                let finalTime = (Date.now() - startTime) / 1000;
+
+                stopTimer();
+
+                document.getElementById("timer").innerHTML =
+                    finalTime.toFixed(2) + " s";
+
+                game = false;
+
                 setTimeout(function(){
-
-                    stopTimer();
-
-                    game = false;
-
                     alert("GAME OVER");
-
                 }, 500);
 
             }
