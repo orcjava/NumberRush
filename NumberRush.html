@@ -214,6 +214,8 @@
 
     function startTimer(){
 
+        clearInterval(timerInterval);
+
         startTime = Date.now();
 
         timerInterval = setInterval(function(){
@@ -225,6 +227,11 @@
                 time.toFixed(2) + " s";
 
         }, 10);
+    }
+
+    function stopTimer(){
+
+        clearInterval(timerInterval);
     }
 
     function checkNumber(number, numberBox){
@@ -266,8 +273,13 @@
             if (mistakes >= 3){
 
                 setTimeout(function(){
+
+                    stopTimer();
+
                     game = false;
+
                     alert("GAME OVER");
+
                 }, 500);
 
             }
