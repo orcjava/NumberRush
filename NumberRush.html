@@ -136,32 +136,36 @@
 
 <script>
 
+    // Game variables
     let numbers = [];
     let nextNumber = 0;
     let mistakes = 0;
     let game = false;
     let bestTime = 0;
 
+    // Audio variables
     let audioContext = null;
     let oscillator = null;
 
+    // Timer variables
     let startTime = 0;
     let timerInterval;
 
+    // Returns a random four-digit number
     function getRandomNumber(){
         return Math.floor(Math.random() * 9000) + 1000;
     }
 
+    // Creates ten random numbers for a new game
     function generateNumbers(){
         numbers = [];
 
         for (let i = 0; i < 10; i++){
             numbers.push(getRandomNumber());
         }
-
-        console.log(numbers);
     }
 
+    // Displays the numbers as clickable boxes
     function displayNumbers(){
         let gameDiv = document.getElementById("gameDiv");
 
@@ -182,6 +186,7 @@
         }
     }
 
+    // Finds the smallest number that must be clicked next
     function findMinNumber(){
         nextNumber = numbers[0];
 
@@ -190,15 +195,14 @@
                 nextNumber = numbers[i];
             }
         }
-
-        console.log("Next number:", nextNumber);
     }
 
+    // Creates the audio context when the game starts
     function startAudio(){
-
         audioContext = new AudioContext();
     }
 
+    // Plays the error sound for 0.5 seconds
     function playErrorSound(){
 
         if (oscillator != null){
@@ -211,18 +215,16 @@
         oscillator.frequency.value = 150;
 
         oscillator.connect(audioContext.destination);
-
         oscillator.start();
 
         let currentOscillator = oscillator;
 
         setTimeout(function(){
-
             currentOscillator.stop();
-
         }, 500);
     }
 
+    // Starts and updates the game timer
     function startTimer(){
 
         clearInterval(timerInterval);
@@ -240,11 +242,12 @@
         }, 10);
     }
 
+    // Stops the game timer
     function stopTimer(){
-
         clearInterval(timerInterval);
     }
 
+    // Updates the best time after a successful game
     function updateBestTime(time){
 
         if (bestTime === 0 || time < bestTime){
@@ -256,18 +259,22 @@
         }
     }
 
+    // Checks the clicked number and correct or wrong answers
     function checkNumber(number, numberBox){
 
+        // Ignore clicks when the game is not running
         if (!game){
             return;
         }
 
+        // Correct number
         if (number === nextNumber){
 
             numberBox.style.backgroundColor = "#b7e4c7";
 
             numbers.splice(numbers.indexOf(number), 1);
 
+            // Check if all numbers have been clicked
             if (numbers.length === 0){
 
                 let finalTime = (Date.now() - startTime) / 1000;
@@ -290,11 +297,10 @@
 
             }
 
-            console.log("Correct!");
-
         }
         else{
 
+            // Wrong number
             mistakes++;
 
             document.getElementById("mistakes").innerHTML =
@@ -308,9 +314,7 @@
                 numberBox.style.backgroundColor = "#e8f1f8";
             }, 500);
 
-            console.log("Wrong!");
-            console.log("Mistakes:", mistakes);
-
+            // End the game after three mistakes
             if (mistakes >= 3){
 
                 let finalTime = (Date.now() - startTime) / 1000;
@@ -330,6 +334,7 @@
         }
     }
 
+    // Resets the game and starts a new round
     function startNewGame(){
 
         mistakes = 0;
