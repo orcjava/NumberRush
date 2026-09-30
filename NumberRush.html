@@ -142,7 +142,8 @@
     let game = false;
     let bestTime = 0;
 
-    let audioContext = new AudioContext();
+    let audioContext = null;
+    let oscillator = null;
 
     let startTime = 0;
     let timerInterval;
@@ -193,13 +194,18 @@
         console.log("Next number:", nextNumber);
     }
 
+    function startAudio(){
+
+        audioContext = new AudioContext();
+    }
+
     function playErrorSound(){
 
-        if (audioContext.state === "suspended"){
-            audioContext.resume();
+        if (oscillator != null){
+            oscillator.stop();
         }
 
-        let oscillator = audioContext.createOscillator();
+        oscillator = audioContext.createOscillator();
 
         oscillator.type = "sawtooth";
         oscillator.frequency.value = 150;
@@ -208,8 +214,12 @@
 
         oscillator.start();
 
+        let currentOscillator = oscillator;
+
         setTimeout(function(){
-            oscillator.stop();
+
+            currentOscillator.stop();
+
         }, 500);
     }
 
@@ -327,6 +337,8 @@
 
         document.getElementById("mistakes").innerHTML = "0 / 3";
         document.getElementById("timer").innerHTML = "0.00 s";
+
+        startAudio();
 
         generateNumbers();
         displayNumbers();
